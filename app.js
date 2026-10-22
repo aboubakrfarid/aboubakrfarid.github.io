@@ -1,20 +1,5 @@
-const shots = [
-  { image: 'assets/flach24-podcast.jpg', alt: 'podcastAlt', caption: 'heroCaption', link: 'https://lnkd.in/p/e5HZb_Nk' },
-  { image: 'assets/nuxera-event.jpg', alt: 'eventAlt', caption: 'eventCaption', link: 'https://lnkd.in/p/eQeNYYc7' }
-];
-let shotIndex = 0;
 let activeLanguage = 'fr';
 
-function renderShot() {
-  const shot = shots[shotIndex];
-  const copy = portfolioCopy[activeLanguage];
-  const image = document.querySelector('#featured-image');
-  image.src = shot.image;
-  image.alt = copy[shot.alt];
-  document.querySelector('#featured-link').href = shot.link;
-  document.querySelector('#featured-caption').textContent = copy[shot.caption];
-  document.querySelector('.frame-count').textContent = String(shotIndex + 1).padStart(2, '0') + ' / 02';
-}
 
 function setLanguage(language) {
   activeLanguage = Object.hasOwn(portfolioCopy, language) ? language : 'fr';
@@ -32,11 +17,8 @@ function setLanguage(language) {
   document.querySelector('nav').setAttribute('aria-label', copy.navigationLabel);
   document.querySelector('.logo-grid').setAttribute('aria-label', copy.organizationsLabel);
   document.querySelector('.community-logo-grid').setAttribute('aria-label', copy.communityLabel);
-  document.querySelector('#previous-shot').setAttribute('aria-label', copy.previousShot);
-  document.querySelector('#next-shot').setAttribute('aria-label', copy.nextShot);
   document.title = copy.pageTitle;
   document.querySelector('meta[name="description"]').content = copy.pageDescription;
-  renderShot();
   document.dispatchEvent(new Event('portfolio-language-change'));
   try { localStorage.setItem('portfolio-language', activeLanguage); } catch {}
 }
@@ -44,14 +26,6 @@ function setLanguage(language) {
 for (const button of document.querySelectorAll('[data-language]')) {
   button.addEventListener('click', () => setLanguage(button.dataset.language));
 }
-document.querySelector('#previous-shot').addEventListener('click', () => {
-  shotIndex = (shotIndex + shots.length - 1) % shots.length;
-  renderShot();
-});
-document.querySelector('#next-shot').addEventListener('click', () => {
-  shotIndex = (shotIndex + 1) % shots.length;
-  renderShot();
-});
 let savedLanguage;
 try { savedLanguage = localStorage.getItem('portfolio-language'); } catch {}
 setLanguage(savedLanguage);

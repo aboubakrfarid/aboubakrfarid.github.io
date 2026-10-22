@@ -184,66 +184,6 @@ h1>span {
   width:680px; max-width:none; height:680px; object-fit:contain; flex-shrink:0;
   transform:translateY(30px)
 }
-.featured-stage {
-  height:400px; position:relative; overflow:hidden;
-  border-top:1px solid var(--line)
-}
-.featured-link {
-  display:block; width:100%; height:100%; position:relative;
-  background:var(--ink)
-}
-.featured-link>img {
-  position:absolute; inset:0 0 0 auto; width:74%; height:100%; object-fit:cover; object-position:50% 38%;
-  transition:transform .6s
-}
-.featured-link:hover>img {
-  transform:scale(1.025)
-}
-.featured-copy {
-  position:absolute; inset:0 auto 0 0; width:29%; min-width:300px; display:flex; flex-direction:column;
-  justify-content:center; gap:20px; background:var(--ink);
-  padding:40px 56px
-}
-.featured-copy .eyebrow {
-  color:var(--accent);
-  margin:0
-}
-.featured-title {
-  font-size:24px; font-weight:600;
-  line-height:1.6
-}
-.featured-watch {
-  display:flex; align-items:center; gap:16px;
-  font-size:13px
-}
-.featured-watch .icon {
-  width:44px; height:44px; border:1px solid #b2b2b2; border-radius:50%;
-  padding:10px
-}
-.featured-controls {
-  position:absolute; bottom:24px; inset-inline:0; display:flex; justify-content:flex-end; align-items:center; gap:20px;
-  pointer-events:none
-}
-.frame-count {
-  font-size:11px; direction:ltr; padding:6px 10px;
-  background:var(--ink)
-}
-.frame-controls {
-  display:flex; gap:8px; direction:ltr;
-  pointer-events:auto
-}
-.frame-controls button {
-  display:grid; place-items:center; width:44px; height:44px; border:1px solid var(--line); border-radius:50%;
-  background:var(--ink);
-  color:var(--paper)
-}
-.frame-controls button:hover {
-  background:var(--surface);
-  border-color:var(--accent)
-}
-#previous-shot .icon {
-  transform:rotate(180deg)
-}
 .eyebrow {
   font-size:11px; font-weight:600; letter-spacing:.13em; line-height:1.8;
   margin-bottom:24px
@@ -591,12 +531,6 @@ html[dir=rtl] .direction-icon {
 html[dir=rtl] .diagonal-icon {
   transform:scaleX(-1)
 }
-html[dir=rtl] #previous-shot .icon {
-  transform:none
-}
-html[dir=rtl] #next-shot .icon {
-  transform:rotate(180deg)
-}
 @media(max-width:1100px) {
   .wrap {
     width:calc(100% - 64px)
@@ -633,10 +567,6 @@ html[dir=rtl] #next-shot .icon {
   .button {
     gap:24px;
     padding:16px 20px
-  }
-  .featured-copy {
-    width:32%;
-    padding:32px
   }
   .about-grid,.community {
     gap:48px
@@ -695,19 +625,6 @@ html[dir=rtl] #next-shot .icon {
   }
   .text-link {
     font-size:12px
-  }
-  .featured-stage {
-    height:340px
-  }
-  .featured-copy {
-    min-width:250px;
-    padding:28px
-  }
-  .featured-title {
-    font-size:20px
-  }
-  .featured-controls {
-    bottom:16px
   }
   .section {
     padding-block:72px
@@ -808,46 +725,6 @@ html[dir=rtl] #next-shot .icon {
   .hero-portrait img {
     width:390px; height:390px;
     transform:translateY(28px)
-  }
-  .featured-stage {
-    height:auto;
-    overflow:visible
-  }
-  .featured-link {
-    display:flex; flex-direction:column;
-    height:auto
-  }
-  .featured-link>img {
-    position:static; width:100%; height:240px; object-position:50% 35%;
-    order:1
-  }
-  .featured-copy {
-    position:static; min-width:0; width:100%; padding:24px 20px; gap:10px;
-    order:2
-  }
-  .featured-copy .eyebrow {
-    font-size:10px
-  }
-  .featured-title {
-    font-size:22px
-  }
-  .featured-watch {
-    font-size:12px
-  }
-  .featured-watch .icon {
-    width:38px; height:38px;
-    padding:8px
-  }
-  .featured-controls {
-    bottom:24px;
-    justify-content:flex-end
-  }
-  .frame-count {
-    display:none
-  }
-  .frame-controls button {
-    width:40px;
-    height:40px
   }
   .fact-strip {
     grid-template-columns:1fr 1fr; gap:24px;
@@ -1047,7 +924,4 @@ html[dir=rtl] #next-shot .icon {
     font-size:40px;
     line-height:1.45
   }
-}
-.featured-link>img {
-  object-position:50% 52%
 }
