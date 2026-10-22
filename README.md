@@ -1,9 +1,7 @@
 # Aboubakr Farid — Portfolio
 
-Public website: https://aboubakrfarid.github.io/
+Public website files for https://aboubakrfarid.github.io/ .
 
-English and Arabic photography, videography and photojournalism portfolio.
-Contact: https://www.linkedin.com/in/faridaboubakr1
+Photography, video, behind-the-scenes films, AI-assisted social visuals and educational content. French, English and Arabic. Built with HTML, CSS and JavaScript; no tracking or runtime dependencies.
 
-This repository contains only the approved public website files.
-Photographs and portfolio content remain the property of their respective rights holders.
+All supplied portfolio media and marks retain their respective rights. Contact: https://www.linkedin.com/in/faridaboubakr1 .

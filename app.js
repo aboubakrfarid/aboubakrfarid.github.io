@@ -1,10 +1,9 @@
-const languageButton = document.querySelector('#language');
 const shots = [
   { image: 'assets/flach24-podcast.jpg', alt: 'podcastAlt', caption: 'heroCaption', link: 'https://lnkd.in/p/e5HZb_Nk' },
   { image: 'assets/nuxera-event.jpg', alt: 'eventAlt', caption: 'eventCaption', link: 'https://lnkd.in/p/eQeNYYc7' }
 ];
 let shotIndex = 0;
-let activeLanguage = 'en';
+let activeLanguage = 'fr';
 
 function renderShot() {
   const shot = shots[shotIndex];
@@ -14,36 +13,37 @@ function renderShot() {
   image.alt = copy[shot.alt];
   document.querySelector('#featured-link').href = shot.link;
   document.querySelector('#featured-caption').textContent = copy[shot.caption];
-  document.querySelector('.frame-count').textContent = `${String(shotIndex + 1).padStart(2, '0')} / 02`;
+  document.querySelector('.frame-count').textContent = String(shotIndex + 1).padStart(2, '0') + ' / 02';
 }
 
 function setLanguage(language) {
-  activeLanguage = language === 'ar' ? 'ar' : 'en';
-  const arabic = activeLanguage === 'ar';
+  activeLanguage = Object.hasOwn(portfolioCopy, language) ? language : 'fr';
   const copy = portfolioCopy[activeLanguage];
   document.documentElement.lang = activeLanguage;
-  document.documentElement.dir = arabic ? 'rtl' : 'ltr';
+  document.documentElement.dir = activeLanguage === 'ar' ? 'rtl' : 'ltr';
   for (const element of document.querySelectorAll('[data-i]')) {
-    const value = copy[element.dataset.i];
-    if (value !== undefined) element.innerHTML = value;
+    if (copy[element.dataset.i] !== undefined) element.innerHTML = copy[element.dataset.i];
   }
-  for (const image of document.querySelectorAll('[data-alt]')) {
-    image.alt = copy[image.dataset.alt];
+  for (const image of document.querySelectorAll('[data-alt]')) image.alt = copy[image.dataset.alt];
+  for (const element of document.querySelectorAll('[data-label]')) element.setAttribute('aria-label', copy[element.dataset.label]);
+  for (const button of document.querySelectorAll('[data-language]')) {
+    button.setAttribute('aria-pressed', String(button.dataset.language === activeLanguage));
   }
-  document.querySelector('nav').setAttribute('aria-label', arabic ? 'التنقل الرئيسي' : 'Main navigation');
-  document.querySelector('.logo-grid').setAttribute('aria-label', arabic ? 'جهات من تجاربي المهنية' : 'Selected organizations');
-  document.querySelector('.community-logo-grid').setAttribute('aria-label', arabic ? 'جهات من العمل الجمعوي والإنساني' : 'Community and humanitarian organizations');
+  document.querySelector('nav').setAttribute('aria-label', copy.navigationLabel);
+  document.querySelector('.logo-grid').setAttribute('aria-label', copy.organizationsLabel);
+  document.querySelector('.community-logo-grid').setAttribute('aria-label', copy.communityLabel);
   document.querySelector('#previous-shot').setAttribute('aria-label', copy.previousShot);
   document.querySelector('#next-shot').setAttribute('aria-label', copy.nextShot);
-  languageButton.textContent = arabic ? 'English' : 'العربية';
-  languageButton.lang = arabic ? 'en' : 'ar';
-  languageButton.setAttribute('aria-label', arabic ? 'Switch to English' : 'التبديل إلى العربية');
-  document.title = arabic ? 'أبوبكر فريد — التصوير والفيديو' : 'Aboubakr Farid — Photography & Film';
+  document.title = copy.pageTitle;
+  document.querySelector('meta[name="description"]').content = copy.pageDescription;
   renderShot();
+  document.dispatchEvent(new Event('portfolio-language-change'));
   try { localStorage.setItem('portfolio-language', activeLanguage); } catch {}
 }
 
-languageButton.addEventListener('click', () => setLanguage(activeLanguage === 'ar' ? 'en' : 'ar'));
+for (const button of document.querySelectorAll('[data-language]')) {
+  button.addEventListener('click', () => setLanguage(button.dataset.language));
+}
 document.querySelector('#previous-shot').addEventListener('click', () => {
   shotIndex = (shotIndex + shots.length - 1) % shots.length;
   renderShot();
@@ -54,5 +54,5 @@ document.querySelector('#next-shot').addEventListener('click', () => {
 });
 let savedLanguage;
 try { savedLanguage = localStorage.getItem('portfolio-language'); } catch {}
-setLanguage(savedLanguage === 'ar' ? 'ar' : 'en');
+setLanguage(savedLanguage);
 document.querySelector('#year').textContent = new Date().getFullYear();
