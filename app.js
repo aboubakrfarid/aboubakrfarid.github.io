@@ -35,8 +35,6 @@ function setLanguage(language) {
   document.querySelector('.community-logo-grid').setAttribute('aria-label', arabic ? 'جهات من العمل الجمعوي والإنساني' : 'Community and humanitarian organizations');
   document.querySelector('#previous-shot').setAttribute('aria-label', copy.previousShot);
   document.querySelector('#next-shot').setAttribute('aria-label', copy.nextShot);
-  document.querySelector('#previous-shot span').textContent = arabic ? '→' : '←';
-  document.querySelector('#next-shot span').textContent = arabic ? '←' : '→';
   languageButton.textContent = arabic ? 'English' : 'العربية';
   languageButton.lang = arabic ? 'en' : 'ar';
   languageButton.setAttribute('aria-label', arabic ? 'Switch to English' : 'التبديل إلى العربية');
