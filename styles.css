@@ -92,18 +92,15 @@ h3 {
   min-height:88px
 }
 .brand {
-  display:flex;
-  align-items:center
+  display:flex; align-items:center; gap:10px; flex:none;
+  min-height:44px; direction:ltr
 }
-.brand-mark {
-  font-size:52px; font-weight:800; letter-spacing:-5px;
-  line-height:1
+.brand-symbol {
+  width:56px; height:35px; flex:none
 }
-.brand-mark span {
-  color:var(--accent)
-}
-.brand>span:last-child {
-  display:none
+.brand-name {
+  font-family:Manrope,Arial,sans-serif; font-size:19px; font-weight:600;
+  letter-spacing:-.055em; line-height:1.15; white-space:nowrap
 }
 nav {
   display:flex; gap:30px;
@@ -508,7 +505,7 @@ footer {
 html[dir=rtl] body {
   font-family:'Noto Arabic',Tahoma,sans-serif
 }
-html[dir=rtl] .brand-mark,html[dir=rtl] h1,html[dir=rtl] [lang=en] {
+html[dir=rtl] .brand,html[dir=rtl] h1,html[dir=rtl] [lang=en] {
   font-family:Manrope,Arial,sans-serif
 }
 html[dir=rtl] h1 {
@@ -590,8 +587,11 @@ html[dir=rtl] .diagonal-icon {
   .language {
     padding:8px 14px
   }
-  .brand-mark {
-    font-size:44px
+  .brand-symbol {
+    width:48px; height:30px
+  }
+  .brand-name {
+    font-size:17px
   }
   .hero-inner {
     min-height:530px;
@@ -682,8 +682,17 @@ html[dir=rtl] .diagonal-icon {
   nav a {
     font-size:11px
   }
-  .brand-mark {
-    font-size:40px
+  .brand {
+    gap:8px
+  }
+  .brand-symbol {
+    width:44px; height:28px
+  }
+  .brand-name {
+    font-size:15px
+  }
+  .brand-name span {
+    display:block
   }
   .language {
     font-size:12px
