@@ -7,7 +7,8 @@ function setLanguage(language) {
   document.documentElement.lang = activeLanguage;
   document.documentElement.dir = activeLanguage === 'ar' ? 'rtl' : 'ltr';
   for (const element of document.querySelectorAll('[data-i]')) {
-    if (copy[element.dataset.i] !== undefined) element.innerHTML = copy[element.dataset.i];
+    const text = copy[element.dataset.i];
+    if (text !== undefined && element.innerHTML !== text) element.innerHTML = text;
   }
   for (const image of document.querySelectorAll('[data-alt]')) image.alt = copy[image.dataset.alt];
   for (const element of document.querySelectorAll('[data-label]')) element.setAttribute('aria-label', copy[element.dataset.label]);
@@ -18,7 +19,19 @@ function setLanguage(language) {
   document.querySelector('.logo-grid').setAttribute('aria-label', copy.organizationsLabel);
   document.querySelector('.community-logo-grid').setAttribute('aria-label', copy.communityLabel);
   document.title = copy.pageTitle;
-  document.querySelector('meta[name="description"]').content = copy.pageDescription;
+  const metadata = {
+    'meta[name="description"]': copy.pageDescription,
+    'meta[property="og:title"]': copy.pageTitle,
+    'meta[property="og:description"]': copy.pageDescription,
+    'meta[property="og:locale"]': copy.pageLocale,
+    'meta[property="og:image:alt"]': copy.portraitAlt,
+    'meta[name="twitter:title"]': copy.pageTitle,
+    'meta[name="twitter:description"]': copy.pageDescription,
+    'meta[name="twitter:image:alt"]': copy.portraitAlt,
+  };
+  for (const [selector, content] of Object.entries(metadata)) {
+    document.querySelector(selector).content = content;
+  }
   document.dispatchEvent(new Event('portfolio-language-change'));
   try { localStorage.setItem('portfolio-language', activeLanguage); } catch {}
 }
